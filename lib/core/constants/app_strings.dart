@@ -1,0 +1,110 @@
+class AppStrings {
+  AppStrings._();
+
+  static const appTitle = 'ParkAlert India';
+  static const firebaseInitializing = 'Initializing Firebase...';
+  static const firebaseErrorTitle = 'Firebase setup required';
+  static const firebaseErrorBody =
+      'Please add your google-services.json in android/app and rebuild.';
+  static const splashMessage = 'ParkAlert India';
+
+  static const loginTitle = 'OTP Login';
+  static const loginSubtitle = 'Sign in with your phone number to continue.';
+  static const loginPhoneHint = 'Enter 10-digit phone number';
+  static const loginSendOtp = 'Send OTP';
+
+  static const otpTitle = 'Verify OTP';
+  static const otpSubtitle = 'Enter the 6-digit code sent to';
+  static const otpFieldLabel = '6-digit OTP';
+  static const verifyOtp = 'Verify OTP';
+  static const resendOtp = 'Resend OTP';
+  static const otpCooldownMessage = 'You can request a new OTP in {seconds} seconds';
+  static const otpResentMessage = 'OTP resent successfully.';
+
+  static const comingSoon = 'Coming soon';
+  static const addVehicleTitle = 'Add Vehicle';
+  static const vehicleNumberLabel = 'Vehicle number';
+  static const cityLabel = 'City';
+  static const save = 'Save';
+  static const vehicleSavedMessage = 'Vehicle saved.';
+  static const vehicleSaveFailed = 'Unable to save vehicle.';
+
+  static const myVehiclesTitle = 'My Vehicles';
+  static const qrTitle = 'Your QR';
+  static const qrSubtitle = 'Scan this QR to alert the owner';
+  static const qrStatusActive = 'QR Active';
+  static const qrStatusInactive = 'QR Disabled';
+  static const qrToggleLabel = 'QR Active';
+  static const qrVehicleStatusLabel = 'Vehicle status';
+  static const qrVehicleStatusActive = 'Active';
+  static const qrVehicleStatusDisabled = 'Disabled';
+  static const qrShare = 'Share QR';
+  static const qrDownload = 'Download';
+  static const qrMissing = 'Vehicle not found.';
+  static const qrToggleFailed = 'Unable to update QR status.';
+
+  static const scanTitle = 'Scan QR';
+  static const alertsTitle = 'Alerts';
+  static const settingsTitle = 'Settings';
+  static const quietHours = 'Quiet Hours';
+  static const quietHoursDescription = 'Enable or disable quiet hours';
+  static const quietHoursStartLabel = 'Quiet hours start';
+  static const quietHoursEndLabel = 'Quiet hours end';
+  static const disableQr = 'Disable QR';
+  static const disableQrPlaceholder = 'Coming in Day 6';
+  static const settingsLogout = 'Log out';
+  static const settingsSavedMessage = 'Settings saved.';
+
+  static const addVehicleButton = 'Add Vehicle';
+  static const homeMyVehicles = 'My Vehicles';
+  static const homeScan = 'Scan QR';
+  static const homeAlerts = 'Alerts';
+  static const homeSettings = 'Settings';
+  static const emptyStateLabel = 'Nothing to show yet.';
+  static const vehiclesEmptyTitle = 'No vehicles yet';
+  static const vehiclesEmptyBody = 'Add your first vehicle to generate a QR.';
+  static const reasonNoParking = 'No Parking';
+  static const reasonAmbulanceBlocked = 'Ambulance blocked';
+  static const reasonAccident = 'Accident';
+  static const reasonFire = 'Fire';
+  static const scanInstruction = 'Point the camera at the ParkAlert QR';
+  static const scanNoteHint = 'Add a short note (optional)';
+  static const scanSendButton = 'Send Alert';
+  static const scanAlertSent = 'Alert sent to the owner';
+  static const scanSendFailed = 'Unable to send alert';
+  static const scanInvalidQr = 'QR not recognized';
+  static String scanVehicleFound(String number) => 'Vehicle $number detected';
+  static const alertsEmptyHint = 'No alerts yet';
+  static const alertNewLabel = 'New';
+  static const alertResolvedLabel = 'Resolved';
+  static const alertResolvedSnackbar = 'Alert marked resolved';
+  static const alertScannerUnknown = 'Public user';
+  static const alertMarkResolved = 'Mark Resolved';
+  static const alertOwnerNoteLabel = 'Owner note';
+  static const alertOwnerNoteHint = 'Add any notes (optional)';
+  static const alertResolveSwipe = 'Resolve alert';
+  static const alertDeleteSwipe = 'Delete alert';
+  static const alertDeletedSnackbar = 'Alert deleted';
+  static const alertDeleteConfirm = 'Are you sure you want to delete this alert?';
+  static const alertDelete = 'Delete';
+  static const alertScannerDeviceLabel = 'Scanner device ID';
+  static const alertSaveOwnerNote = 'Save note';
+  static const alertBlockScanner = 'Block scanner';
+  static const alertBlockDevice = 'Block device';
+  static const alertBlockSuccess = 'Scanner blocked successfully';
+  static const alertOwnerNoteSaved = 'Owner note saved.';
+  static const vehicleStatusToggleLabel = 'Vehicle status';
+  static const vehicleStatusActive = 'Active';
+  static const vehicleStatusDisabled = 'Disabled';
+  static const vehicleLastScannedLabel = 'Last scanned';
+  static const appVersionLabel = 'App version';
+  static const howItWorksTitle = 'How ParkAlert works';
+  static const howItWorksSubtitle = 'Understand the basics of the pilot';
+  static const howItWorksStep1 = 'Add your vehicle and generate the ParkAlert QR.';
+  static const howItWorksStep2 = 'Stick the QR near the rear number plate or windshield.';
+  static const howItWorksStep3 = 'A scanner reads the QR and picks a reason.';
+  static const howItWorksStep4 = 'You receive the alert, review it, and mark it resolved.';
+  static const reportProblem = 'Report a problem';
+  static const reportProblemEmail = 'pilot@parkalert.in';
+  static const reportProblemFailure = 'Unable to open the email client.';
+}

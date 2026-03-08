@@ -1,0 +1,8 @@
+﻿{
+  "name": "parkalert-demo",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "demo": "flutter run --dart-define=DEMO_MODE=true"
+  }
+}
