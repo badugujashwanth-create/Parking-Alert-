@@ -3,16 +3,42 @@ import 'dart:ui' as ui;
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 import 'app.dart';
 import 'core/constants/app_strings.dart';
+import 'core/routing/app_routes.dart';
+import 'core/theme/app_theme.dart';
 import 'core/widgets/firebase_error_screen.dart';
 import 'core/widgets/loading_screen.dart';
+import 'demo/demo_mode_controller.dart';
 import 'firebase_options.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  if (const bool.fromEnvironment('DEMO_MODE')) {
+    runApp(const ParkAlertDemoApp());
+    return;
+  }
   runApp(const FirebaseInitCheck());
+}
+
+class ParkAlertDemoApp extends StatelessWidget {
+  const ParkAlertDemoApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return ChangeNotifierProvider(
+      create: (_) => DemoModeController(),
+      child: MaterialApp(
+        title: '${AppStrings.appTitle} Demo',
+        theme: AppTheme.light,
+        debugShowCheckedModeBanner: false,
+        initialRoute: AppRoutes.demoDashboard,
+        onGenerateRoute: AppRoutes.onGenerateRoute,
+      ),
+    );
+  }
 }
 
 class FirebaseInitCheck extends StatefulWidget {
