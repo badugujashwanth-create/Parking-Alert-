@@ -1,6 +1,12 @@
 # ParkAlert India
 
-Day 4 expands the MVP with real QR scanning, audit-friendly scan logs, a push-powered owner inbox, and Firebase Cloud Functions that deliver notifications when an alert arrives.
+> **Status: MVP** — Flutter analysis and the current smoke test pass; real Firebase operation requires owner-supplied local configuration.
+
+[![Watch the ParkAlert India demo](docs/demo/demo-thumbnail.png)](docs/demo/demo.webm)
+
+> Watch the credential-free synthetic demo dashboard recorded from a verified Flutter release web build.
+
+ParkAlert India explores a privacy-aware way for someone to alert a vehicle owner through a QR-mediated workflow without publishing the owner's phone number. The app includes QR scanning, audit-friendly scan logs, an owner inbox, a synthetic demo mode, and optional Firebase Cloud Functions.
 
 ## Tech stack
 
