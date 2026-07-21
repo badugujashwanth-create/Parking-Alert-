@@ -4,7 +4,9 @@
 
 [Open MP4](https://jashwanth-portfolio-ten.vercel.app/media/parkalert/demo.mp4) · [Download WebM](https://jashwanth-portfolio-ten.vercel.app/media/parkalert/demo.webm) · [Captions](https://jashwanth-portfolio-ten.vercel.app/media/parkalert/demo-captions.vtt)
 
-Day 4 expands the MVP with real QR scanning, audit-friendly scan logs, a push-powered owner inbox, and Firebase Cloud Functions that deliver notifications when an alert arrives.
+> **Status: experimental security hold.** The credential-free synthetic demo is runnable; real Firebase operation and public release require owner-verified console configuration, rules, restrictions, and device evidence.
+
+ParkAlert India explores a privacy-aware QR-mediated parking-alert workflow without publishing the owner's phone number. Repository code includes QR scanning, scan logs, an owner inbox, and a deterministic demo surface; cloud delivery is not claimed as deployed or production-ready.
 
 ## Tech stack
 
