@@ -10,9 +10,9 @@
 
 ## Record
 
-For a web-capable build, run scripts/record-demo.ps1 with the healthy local BaseUrl. The Playwright specification captures an overview screenshot, thumbnail, and WebM video. Review every frame before committing it.
+For a web-capable build, run `scripts/record-demo.ps1` with the healthy local `BaseUrl`. The Playwright specification waits for Flutter's rendered canvas, enables accessibility semantics, captures the overview and thumbnail, and records the scripted workflow at 1280×720.
 
 ## Post-production
 
-Trim loading time only; do not splice in fake success states. Add demo-captions.vtt. If FFmpeg is available, create a compressed MP4 and preview GIF, then verify size and readability. Never commit a large raw capture.
+Do not splice in fake success states. Mux the narration into MP4 and WebM, keep `demo-captions.vtt` beside both formats, and verify duration, codecs, dimensions, audio level, representative frames, and SHA-256 checksums. Commit only the final deliverables; discard the raw WAV and Playwright capture.
 

@@ -1,17 +1,25 @@
 # Test report
 
-Audited on 2026-07-17 using the checked-out `portfolio-polish` branch on Windows.
+Audit date: 2026-07-21
 
-| Command | Result | Evidence / notes |
+Branch: `phase4-parkalert-security-completion`
+
+## Targeted evidence
+
+| Check | Result | Evidence |
 |---|---|---|
-| `flutter pub get` | Pass | Dependencies resolved |
-| `flutter analyze` | Pass | No issues found |
-| `GitHub Actions stable Flutter analyze` | Pass with informational warning | Flutter 3.44 reports the existing `Switch.activeColor` deprecation; CI keeps informational diagnostics visible without treating them as errors |
-| `flutter test` | Pass | 1 smoke test passed |
-| `flutter build web --release --dart-define=DEMO_MODE=true` | Pass | Credential-free demo release bundle generated |
+| Flutter analysis | Pass | No issues after safe lifecycle and fail-closed client changes |
+| Flutter tests | Pass | 5 tests: local lifecycle, disabled precondition, validators, rules structure, and no direct alert writes |
+| Release web build | Pass | `flutter build web --release --dart-define=DEMO_MODE=true` |
+| Diff integrity | Pass | `git diff --check` |
+| Secret pattern scan | Pass | No Firebase, private-key, AWS, GitHub-token, or Slack-token pattern in the candidate tree |
+| Media verification | Pass | 3:08.6 MP4/WebM, 1280×720, narrated audio, 7 cues, inspected frames, matching SHA-256 manifest |
+| Real Firebase | Not run | No owner-approved local configuration or console evidence |
+| Rules deployment | Not claimed | `firestore.rules` is reference configuration only |
+| Notifications/devices | Not run | Owned-device and backend evidence required |
 
-## Overall status
+## Final repository gate
 
-Verified for the commands listed above. Demo mode bypasses Firebase initialization only when explicitly compiled with `DEMO_MODE=true`; real mode still requires local Firebase configuration.
+The candidate passed Flutter analysis, all 5 tests, and the credential-free release web build locally. The final MP4 and WebM are 1280×720, include audible narration, run for 188.6 seconds, have 7 caption cues, and were inspected at representative frames across the workflow. Secret and repository-diff checks are recorded before handoff; CI remains a pull-request check rather than a release authorization.
 
-Warnings and missing checks remain limitations, even when another check passes.
+External Firebase and device gates remain excluded rather than inferred from green repository checks.

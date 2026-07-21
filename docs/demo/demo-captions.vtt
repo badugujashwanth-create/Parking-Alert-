@@ -1,16 +1,22 @@
 WEBVTT
 
-00:00.000 --> 00:05.000
-ParkAlert India
+00:00.000 --> 00:22.000
+ParkAlert runs here as a synthetic local simulation. No Firebase, camera, account, notification, or network request is made.
 
-00:05.000 --> 00:15.000
-The problem, intended user, and starting point.
+00:22.000 --> 00:45.000
+The QR alias and masked vehicle are repository fixtures, not real owner, plate, location, or QR data.
 
-00:15.000 --> 00:35.000
-A walkthrough of the primary workflow using safe demonstration data.
+00:45.000 --> 01:15.000
+A reporter chooses a bounded reason, enters a synthetic note, and prepares a local review state.
 
-00:35.000 --> 00:46.000
-Architecture, technology boundaries, and verified behavior.
+01:15.000 --> 01:45.000
+The preview is explicitly not sent. Direct client alert and scan-log writes remain disabled.
 
-00:46.000 --> 00:55.000
-Current status, known limitation, and repository owner badugujashwanth-create.
+01:45.000 --> 02:15.000
+The alert enters a simulated owner inbox and is resolved locally with no external side effect.
+
+02:15.000 --> 02:40.000
+Activity entries and simulation controls are local demonstration evidence, not production telemetry.
+
+02:40.000 --> 03:05.000
+Firebase rules deployment, App Check, key restrictions, trusted backend controls, and owned-device evidence remain release gates.

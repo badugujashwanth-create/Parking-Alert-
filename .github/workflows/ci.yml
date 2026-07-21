@@ -20,3 +20,4 @@ jobs:
       - run: flutter pub get
       - run: flutter analyze --no-fatal-infos
       - run: flutter test
+      - run: flutter build web --release --dart-define=DEMO_MODE=true

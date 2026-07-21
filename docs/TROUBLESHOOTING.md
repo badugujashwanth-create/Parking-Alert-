@@ -1,18 +1,23 @@
 # Troubleshooting
 
-## Installation fails
+## Demo opens the Firebase error screen
 
-Use the package manager and lockfile already committed to this repository. Confirm the required runtime is installed, clear only generated caches, and retry the install command from [DEVELOPMENT.md](DEVELOPMENT.md).
+Rebuild with the explicit safe flag:
 
-## The application starts but a feature is unavailable
+```powershell
+flutter run -d chrome --dart-define=DEMO_MODE=true
+```
 
-Check the browser or terminal error first, then verify the documented environment variables and dependent services. Real Firebase mode requires an owner-supplied local configuration; the repository test is currently a placeholder smoke test.
+Do not add a real Firebase configuration merely to bypass the error.
 
-## Tests and builds
+## Alert delivery reports `trusted_backend_required`
 
-Run checks from the component directory shown in [TEST_REPORT.md](TEST_REPORT.md). A successful dependency install is not evidence that a test or production build passed.
+This is the expected fail-closed result in real mode. No trusted alert backend is included or verified. Use the local simulation; do not weaken rules or restore direct client writes.
+
+## Tests or build fail
+
+Run `flutter pub get`, repair the first actionable error, and rerun the smallest affected command before the complete gate.
 
 ## Sensitive configuration
 
-Never paste real credentials into an issue or screenshot. Replace local configuration values with placeholders before sharing diagnostic output.
-
+Never paste keys, tokens, QR identifiers, phone numbers, plates, or console screenshots containing private values into an issue or demo. Repository cleanup cannot rotate a historically exposed key.

@@ -1,31 +1,30 @@
 # ParkAlert India architecture
 
-Flutter parking-contact prototype using QR-mediated alerts, privacy-aware demo data, Firebase services, and optional Cloud Functions.
-
-## System view
+## Qualified path
 
 ```mermaid
 flowchart LR
-  N0[Vehicle owner or reporter] --> N1
-  N1[Flutter app] --> N2
-  N2[Demo controller or Firebase services] --> N3
-  N3[Firestore/Auth/Messaging] --> N4
-  N4[Cloud Functions]
+  A[Synthetic QR fixture] --> B[Flutter local simulation]
+  B --> C[Local not-sent preview]
+  C --> D[Simulated owner inbox]
+  D --> E[Local resolution]
 ```
 
-## Component boundaries
+This path uses `ParkAlertDemoApp`, `DemoDashboardScreen`, and `DemoModeController`. It initializes no Firebase service and performs no camera, authentication, notification, persistence-backend, or network action.
 
-- **Vehicle owner or reporter:** initiates the primary workflow.
-- **Flutter app:** owns one stage of the request or interaction flow.
-- **Demo controller or Firebase services:** owns one stage of the request or interaction flow.
-- **Firestore/Auth/Messaging:** owns one stage of the request or interaction flow.
-- **Cloud Functions:** provides the terminal integration or persistence boundary.
+## Held real-service path
 
-## Runtime and trust boundaries
+The repository contains Firebase-oriented client services for authentication, vehicles, tokens, alerts, and QR scanning. That path is not qualified:
 
-Real Firebase mode requires an owner-supplied local configuration; the repository test is currently a placeholder smoke test. Inputs crossing a network, filesystem, provider, or database boundary should be validated and logged without sensitive values. Optional integrations must fail clearly rather than being presented as successful.
+- local platform configuration is intentionally absent;
+- QR reads and direct client alert/scan-log writes are denied by the reference rules;
+- `ScanService.recordAlert` fails with `trusted_backend_required`;
+- no trusted alert-delivery Function or service is implemented;
+- reference rules are not claimed as deployed;
+- console and device controls are unverified.
 
-## Technology
+## Intended trust boundary
 
-Flutter/Dart, Firebase Auth/Firestore/Messaging/Analytics, TypeScript Cloud Functions.
+A future scanner should submit a bounded request to an authenticated, App-Check-protected, rate-limited backend. The backend—not an arbitrary client—would resolve a QR mapping, apply blocking/abuse policy, create the owner's alert and audit record, and request notification delivery. Owner clients would read and update only their own data.
 
+Until that backend and its external controls are reviewed, the real-service path remains disabled.

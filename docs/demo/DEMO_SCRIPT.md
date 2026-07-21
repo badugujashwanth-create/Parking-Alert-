@@ -1,16 +1,15 @@
-# ParkAlert India demo script
+# ParkAlert safe walkthrough
 
-**Target length:** 60–90 seconds  
-**Format:** Mobile/web  
-**Data:** synthetic, repository-provided demo data, or public non-personal examples only
+**Target:** 3:05 narrated real-browser recording
 
-## Walkthrough
+**Data:** repository-provided synthetic QR, vehicle, note, and activity values only
 
-1. **Title (0–5s):** Show “ParkAlert India” and its one-sentence problem statement.
-2. **Starting state (5–15s):** Show the clean entry point and identify the intended user.
-3. **Primary workflow (15–55s):** Launch in demo mode; show the synthetic vehicle dashboard; walk through the QR alert concept; review activity/statistics; explain the privacy and Firebase boundaries.
-4. **Architecture (55–75s):** Show the architecture guide and name the main runtime boundaries.
-5. **Close (75–90s):** Display the project name, badugujashwanth-create, current status, and one honest limitation.
+1. Establish the experimental security hold and no-network simulation boundary.
+2. Inspect the synthetic QR alias and masked vehicle label.
+3. Choose a reason, enter a synthetic note, and prepare the local preview.
+4. Confirm **no message sent**, then add it to the simulated owner inbox.
+5. Resolve the synthetic alert locally.
+6. Inspect local activity and simulation controls.
+7. Close on the exact Firebase console, backend, rules, App Check, key, and device gates.
 
-Do not show environment files, tokens, browser bookmarks, notifications, real user accounts, or private URLs. Do not edit the footage to imply an integration succeeded when it did not.
-
+Do not show a real key, project, phone, plate, QR, token, notification, console, or person.

@@ -12,6 +12,7 @@ import 'core/theme/app_theme.dart';
 import 'core/widgets/firebase_error_screen.dart';
 import 'core/widgets/loading_screen.dart';
 import 'demo/demo_mode_controller.dart';
+import 'features/demo/screens/demo_dashboard_screen.dart';
 import 'firebase_options.dart';
 
 Future<void> main() async {
@@ -34,7 +35,7 @@ class ParkAlertDemoApp extends StatelessWidget {
         title: '${AppStrings.appTitle} Demo',
         theme: AppTheme.light,
         debugShowCheckedModeBanner: false,
-        initialRoute: AppRoutes.demoDashboard,
+        home: const DemoDashboardScreen(),
         onGenerateRoute: AppRoutes.onGenerateRoute,
       ),
     );

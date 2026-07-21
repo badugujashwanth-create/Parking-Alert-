@@ -37,6 +37,7 @@ migrate_working_dir/
 node_modules/
 test-results/
 playwright-report/
+docs/demo/demo-narration.wav
 
 # Symbolication related
 app.*.symbols

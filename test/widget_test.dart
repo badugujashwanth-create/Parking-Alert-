@@ -1,16 +1,48 @@
-// This is a basic Flutter widget test.
-//
-// To perform an interaction with a widget in your test, use the WidgetTester
-// utility in the flutter_test package. For example, you can send tap and scroll
-// gestures. You can also use WidgetTester to find child widgets in the widget
-// tree, read text, and verify that the values of widget properties are correct.
-
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:park_alert/main.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 void main() {
-  testWidgets('ParkAlertApp placeholder smoke test', (WidgetTester tester) async {
-    await tester.pumpWidget(const MaterialApp(home: Text('ParkAlert India')));
-    expect(find.text('ParkAlert India'), findsOneWidget);
+  setUp(() {
+    SharedPreferences.setMockInitialValues({});
+  });
+
+  testWidgets('safe demo completes a local alert lifecycle', (tester) async {
+    await tester.pumpWidget(const ParkAlertDemoApp());
+    await tester.pumpAndSettle();
+
+    expect(find.text('SYNTHETIC / LOCAL / NOT SENT'), findsOneWidget);
+    expect(find.text('PA-DEMO-1042'), findsOneWidget);
+
+    await tester.tap(find.text('Blocking exit'));
+    await tester.enterText(find.byKey(const ValueKey('demo-note')), 'Please move when safe.');
+    await tester.ensureVisible(find.byKey(const ValueKey('prepare-alert')));
+    await tester.pumpAndSettle();
+    await tester.tap(find.byKey(const ValueKey('prepare-alert')));
+    await tester.pumpAndSettle();
+
+    expect(find.text('LOCAL PREVIEW — NO MESSAGE SENT'), findsOneWidget);
+    await tester.ensureVisible(find.byKey(const ValueKey('deliver-locally')));
+    await tester.pumpAndSettle();
+    await tester.tap(find.byKey(const ValueKey('deliver-locally')));
+    await tester.pumpAndSettle();
+
+    expect(find.text('New synthetic alert. No push notification was sent.'), findsOneWidget);
+    await tester.ensureVisible(find.byKey(const ValueKey('resolve-alert')));
+    await tester.pumpAndSettle();
+    await tester.tap(find.byKey(const ValueKey('resolve-alert')));
+    await tester.pumpAndSettle();
+
+    expect(find.text('RESOLVED'), findsOneWidget);
+    expect(find.text('Resolved locally. No external side effect.'), findsOneWidget);
+  });
+
+  testWidgets('alert preview stays disabled until a reason is selected', (tester) async {
+    await tester.pumpWidget(const ParkAlertDemoApp());
+    await tester.pumpAndSettle();
+
+    final button = tester.widget<FilledButton>(find.byKey(const ValueKey('prepare-alert')));
+    expect(button.onPressed, isNull);
   });
 }

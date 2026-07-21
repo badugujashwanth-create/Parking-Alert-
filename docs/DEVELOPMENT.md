@@ -1,29 +1,22 @@
 # Development guide
 
-## Purpose
+## Safe local workflow
 
-Flutter parking-contact prototype using QR-mediated alerts, privacy-aware demo data, Firebase services, and optional Cloud Functions.
-
-## Prerequisites
-
-Flutter/Dart, Firebase Auth/Firestore/Messaging/Analytics, TypeScript Cloud Functions.
-
-## Install
+Requires Flutter stable.
 
 ```powershell
 flutter pub get
+flutter run -d chrome --dart-define=DEMO_MODE=true
 ```
 
-## Run
-
-```powershell
-flutter run --dart-define=DEMO_MODE=true
-```
+The demo uses synthetic fixtures and no credential.
 
 ## Verify
 
-- Tests: `flutter analyze; flutter test`
-- Build: `Flutter platform build (not executed in this audit)`
+```powershell
+flutter analyze
+flutter test
+flutter build web --release --dart-define=DEMO_MODE=true
+```
 
-See [TEST_REPORT.md](TEST_REPORT.md) for the latest audited results. Copy example environment files instead of committing real values. Generated dependencies, caches, logs, databases, and build output must remain untracked.
-
+Do not generate or commit Firebase platform files while working on the local simulation. Real-service development requires an owner-approved separate environment and the gates in [../PROJECT_COMPLETION_REPORT.md](../PROJECT_COMPLETION_REPORT.md).

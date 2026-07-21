@@ -1,13 +1,11 @@
-# ParkAlert India storyboard
+# Storyboard
 
-| Time | Frame | Evidence to show |
-|---:|---|---|
-| 0–5s | Title | Project name and concise problem statement |
-| 5–15s | Entry point | Intended user and starting screen/terminal |
-| 15–35s | Main action | First half of the real primary workflow |
-| 35–55s | Result | Actual response, state change, or validated output |
-| 55–75s | Architecture | Component boundaries from docs/ARCHITECTURE.md |
-| 75–90s | Close | Owner, status, limitation, and repository name |
-
-Use 1280×720 or 1920×1080 output. Leave short pauses after meaningful results and avoid rapid pointer movement.
-
+| Time | Surface | Evidence |
+|---|---|---|
+| 0:00–0:22 | Boundary banner | Synthetic, local, not sent; release hold |
+| 0:22–0:45 | QR fixture | Alias and masked vehicle only |
+| 0:45–1:15 | Alert preparation | Reason and synthetic note |
+| 1:15–1:45 | Local preview | No message or network side effect |
+| 1:45–2:15 | Simulated inbox | Local delivery and resolution |
+| 2:15–2:40 | Activity | Deterministic local evidence |
+| 2:40–3:05 | Controls and close | External Firebase gates remain pending |
