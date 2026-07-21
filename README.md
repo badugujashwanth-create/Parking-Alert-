@@ -1,5 +1,9 @@
 # ParkAlert India
 
+[![Watch the ParkAlert India demo](https://jashwanth-portfolio-ten.vercel.app/media/parkalert/poster.png)](https://jashwanth-portfolio-ten.vercel.app/work/parking-alert/)
+
+[Open MP4](https://jashwanth-portfolio-ten.vercel.app/media/parkalert/demo.mp4) · [Download WebM](https://jashwanth-portfolio-ten.vercel.app/media/parkalert/demo.webm) · [Captions](https://jashwanth-portfolio-ten.vercel.app/media/parkalert/demo-captions.vtt)
+
 Day 4 expands the MVP with real QR scanning, audit-friendly scan logs, a push-powered owner inbox, and Firebase Cloud Functions that deliver notifications when an alert arrives.
 
 ## Tech stack
