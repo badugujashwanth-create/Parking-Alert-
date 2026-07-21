@@ -53,6 +53,7 @@ class VehicleService {
             'qrId': qrId,
             'vehicleId': vehicleRef.id,
             'ownerUid': uid,
+            'vehicleLabel': _maskedVehicleLabel(normalizedNumber),
             'isActive': true,
             'createdAt': now,
           });
@@ -125,6 +126,12 @@ class VehicleService {
       buffer.write(alphabet[random.nextInt(alphabet.length)]);
     }
     return buffer.toString();
+  }
+
+  String _maskedVehicleLabel(String vehicleNumber) {
+    final compact = vehicleNumber.replaceAll(RegExp(r'\s+'), '');
+    final suffix = compact.length <= 4 ? compact : compact.substring(compact.length - 4);
+    return 'Vehicle •••• $suffix';
   }
 }
 

@@ -1,0 +1,15 @@
+This is ParkAlert India, an experimental parking-alert workflow shown in its only qualified mode: a synthetic, local simulation. The red boundary is the important starting point. This browser run makes no Firebase, notification, camera, account, or network request. No message will be sent, and the project remains on a public-release security hold.
+
+The first step represents a QR scan result using a repository fixture. The QR alias is synthetic, and the vehicle label is deliberately masked. There is no real registration, owner, location, or QR identifier in this recording. Public lookup is denied in the reference Firestore rules until a trusted backend and privacy model are independently reviewed.
+
+Next, the reporter chooses a bounded reason and enters a clearly synthetic note. The prepare action does not deliver anything. It creates a local review state so the user can inspect the reason, note, and destination before continuing. This is the product's central interaction without a fake success claim.
+
+The preview explicitly says no message was sent. Adding it to the simulated owner inbox changes only local browser state. Direct client writes to scan logs or another owner's alerts were removed from the candidate branch. The real client now returns a trusted-backend-required error until an authenticated, App-Check-protected, rate-limited service exists.
+
+The simulated owner can inspect the new alert and resolve it. The result remains local and says that it has no external side effect. This completes the deterministic QR-to-resolution story while keeping notification delivery, device tokens, authentication, blocking, retention, and deletion outside the verified claim.
+
+The activity view records the local preview, simulated inbox delivery, and resolution events. These entries are synthetic evidence for the demonstration, not production telemetry. The simulation controls are also local and exist to exercise UI states without weakening the Firebase boundary.
+
+Repository checks cover this lifecycle, the disabled precondition, validators, deny-by-default rule structure, and the absence of direct alert writes. Flutter analysis, tests, and the credential-free web build pass locally. Those checks do not prove external Firebase safety.
+
+Before any release, the owner must rotate or restrict the historical client key, verify project ownership, emulator-test and deploy rules, enforce App Check and authorized domains, implement the trusted backend and abuse controls, and validate permission, token, foreground, background, failure, retry, block, deletion, and recovery behavior on owned devices. Until that evidence exists, ParkAlert remains an honest experimental security hold.

@@ -33,6 +33,11 @@ migrate_working_dir/
 .pub/
 /build/
 /android/build/
+/android/app/google-services.json
+node_modules/
+test-results/
+playwright-report/
+docs/demo/demo-narration.wav
 
 # Symbolication related
 app.*.symbols

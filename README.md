@@ -1,70 +1,66 @@
 # ParkAlert India
 
-[![Watch the ParkAlert India demo](https://jashwanth-portfolio-ten.vercel.app/media/parkalert/poster.png)](https://jashwanth-portfolio-ten.vercel.app/work/parking-alert/)
+> **Experimental security hold:** the credential-free local simulation is runnable. Real QR lookup, alert delivery, Firebase deployment, notifications, and public release remain disabled until the repository owner verifies the external security checklist.
 
-[Open MP4](https://jashwanth-portfolio-ten.vercel.app/media/parkalert/demo.mp4) · [Download WebM](https://jashwanth-portfolio-ten.vercel.app/media/parkalert/demo.webm) · [Captions](https://jashwanth-portfolio-ten.vercel.app/media/parkalert/demo-captions.vtt)
+[![Watch the ParkAlert safe local walkthrough](docs/demo/demo-thumbnail.png)](docs/demo/demo.mp4)
 
-Day 4 expands the MVP with real QR scanning, audit-friendly scan logs, a push-powered owner inbox, and Firebase Cloud Functions that deliver notifications when an alert arrives.
+[Watch MP4](docs/demo/demo.mp4) · [Download WebM](docs/demo/demo.webm) · [Captions](docs/demo/demo-captions.vtt) · [Checksums](docs/demo/SHA256SUMS.txt)
 
-## Tech stack
+ParkAlert explores a QR-mediated way to prepare a parking alert without publishing an owner's phone number. Its safe simulation demonstrates the interaction locally with synthetic data and no Firebase, camera, account, notification, or network request.
 
-- Flutter (stable, Material 3)
-- Firebase: `firebase_core`, `firebase_auth`, `cloud_firestore`, `firebase_messaging`
-- Provider for shared state plus services/controllers per feature
-- `mobile_scanner` for RT QR scanning
-- Firebase Cloud Functions (TypeScript) for the `sendAlertNotification` trigger
+The 3:08 narrated walkthrough records the real credential-free build at 1280×720. It uses only synthetic data and shows the safe boundary, QR fixture, reason and note, unsent review, simulated inbox, local resolution, activity, simulation controls, and remaining release gates. The older 55-second portfolio asset must not replace this candidate until the branch is approved.
 
-## Getting started
+## Verified local workflow
 
-1. Open a terminal inside the project root.
-2. Fetch packages: `flutter pub get`
-3. Start the app: `flutter run`
+1. Inspect a synthetic QR alias and masked vehicle label.
+2. Choose an alert reason and enter an optional synthetic note.
+3. Review a **local preview — no message sent** state.
+4. Add the alert to a simulated owner inbox.
+5. Resolve it locally with no external side effect.
 
-## Firebase setup (Android & Web)
+Run it with:
 
-1. Download `google-services.json` (Android) or `GoogleService-Info.plist` (iOS/Web) and drop it under the respective platform folder.
-2. Enable **Phone Authentication** (`Authentication > Sign-in method`) and add Firebase Auth test numbers (e.g., `+91 99999 11111` → code `123456`).
-3. Register SHA-1/SHA-256 fingerprints (`./gradlew signingReport` or `flutterfire configure`) in the Firebase console.
-4. Enable **Cloud Messaging** (FCM) and configure the Android notification icon:
-   - Add `android/app/src/main/res/drawable/ic_notification.xml` (Material icon) or use the default `ic_launcher`.
-   - Ensure `android/app/src/main/AndroidManifest.xml` declares `DEFAULT_LIGHT` and permission entries if needed.
-5. Deploy Cloud Functions after installing dependencies:
-   ```bash
-   cd functions
-   npm install
-   # Deploy the push notification trigger
-   firebase deploy --only functions
-   ```
+```bash
+flutter pub get
+flutter run -d chrome --dart-define=DEMO_MODE=true
+```
 
-## Cloud Functions
+No credential is required for this workflow.
 
-- `functions/index.ts` exports `sendAlertNotification`, a Firestore trigger on `users/{ownerUid}/alerts/{alertId}` that reads owner tokens and sends a multicast message via FCM.
-- The payload includes `alertId`, `vehicleId`, `qrId`, and `reason`, so the Flutter app can deep-link to the right alert.
-- Update the FCM tokens by letting Flutter upload them to `users/{uid}/tokens/{token}` whenever the user logs in (handled inside `NotificationService`).
+## Security boundary
 
-## Project highlights
+- `android/app/google-services.json` is ignored; only a placeholder example is tracked.
+- `lib/firebase_options.dart` fails closed until the owner generates a local configuration.
+- `ScanService.recordAlert` refuses direct client writes. A trusted, abuse-controlled backend must be implemented and verified first.
+- The tracked `firestore.rules` deny direct alert creation, scan-log access, QR reads, unknown paths, and cross-user access. They are reference rules until deployment is independently verified.
+- No notification Function source or deployed trigger is included or claimed.
+- App Check, authorized domains, API-key restrictions/rotation, deployed rules, authentication policy, quotas, rate limits, notification delivery, and device recovery remain external owner checkpoints.
 
-- `lib/core/services/scan_service.dart` (plus `ScanController`) resolves QR metadata, validates the QR state, and writes both `scanLogs/{scanId}` and `users/{ownerUid}/alerts/{alertId}` in a transaction.
-- `ScanQRScreen` uses `mobile_scanner` to detect QR codes, shows a confirmation sheet (reason/note), respects loading states, and surfaces errors like invalid or disabled QR codes.
-- Alerts flow gained filters, swipe-to-resolve/delete, owner notes, and a mark-resolved CTA in `AlertDetailsScreen`.
-- Vehicle controls now expose quick QR toggles in the list plus status/last-scanned info inside `QRDisplayScreen`, with batched writes keeping Firestore `qr` + `vehicles` docs consistent.
-- `AlertsInboxScreen` and `AlertDetailsScreen` stream alerts, allow owners to view reason/note/scanner identity, and mark alerts as resolved.
-- `NotificationService` requests FCM permissions, keeps Firestore tokens in sync, and `ParkAlertApp` listens to `FirebaseMessaging.onMessageOpenedApp` to deep-link to `AlertDetailsScreen`.
-- Routing now exposes `/alerts/details` so push taps or deep links can show a specific alert.
+## Verify the repository
 
-## Testing guidance
+```bash
+flutter analyze
+flutter test
+flutter build web --release --dart-define=DEMO_MODE=true
+```
 
-1. Sign in with a Firebase Auth test phone number (`+91 99999 11111` → `123456`).
-2. Switch to the Scan tab, point the camera at `https://parkalert.in/q/<qrId>` or a raw `qrId`, choose a reason/note, and tap **Send Alert**.
-3. Verify Firestore:
-   - `scanLogs/{scanId}` includes `scannerDeviceId`, `scannerPhone` (if logged in), and `reason`.
-   - `users/{ownerUid}/alerts/{alertId}` contains `status: "new"` and the same reason/note.
-4. Observe the owner inbox:
-   - The Alerts tab displays the incoming alert.
-   - Tap it to open `AlertDetailsScreen`, review the scanner identity (masked phone or “Public user”), and mark it resolved.
-5. Ensure notifications arrive (app in foreground/background) and tapping a notification routes to the alert details screen. The FCM message payload includes `alertId`.
+Tests cover the complete local lifecycle, its disabled precondition, validation, deny-by-default rules structure, and the absence of direct client alert writes.
 
-## Notes
+## Real Firebase mode
 
-- The scanner keeps a persistent `scannerDeviceId` using `SharedPreferences`, so every alert can be tied to the device even when the user is logged out.
-- Quiet hours/sample advanced usage are still on the roadmap (Day 5+), but the basic scan-to-alert flow is end-to-end.
+Real mode is intentionally not runnable from this repository checkout. Before any release or real-data test, the owner must:
+
+1. Rotate or restrict the historically exposed Firebase client key and retain redacted evidence.
+2. Generate local platform configuration with `flutterfire configure` without committing it.
+3. Review and deploy Firestore rules; verify them with the emulator and a separate project.
+4. Enable and enforce App Check where supported, restrict authorized domains and API keys, and set quotas/abuse controls.
+5. Implement a trusted alert-delivery backend; direct client creation stays denied.
+6. Validate authentication, notification permission denial, token lifecycle, background delivery, retry/failure states, blocking, and deletion on owned devices.
+
+Until every item is evidenced, there is no release, production, pilot, live-user, latency, reliability, or security-completion claim.
+
+See [PROJECT_COMPLETION_REPORT.md](PROJECT_COMPLETION_REPORT.md), [SECURITY.md](SECURITY.md), [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md), and [docs/TEST_REPORT.md](docs/TEST_REPORT.md).
+
+## License status
+
+No license file is present. All rights remain with the copyright holder unless an ownership-informed license is added manually.
